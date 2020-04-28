@@ -5,6 +5,7 @@ import com.lineage.server.datatables.NpcTable;
 import com.lineage.server.datatables.UBTable;
 import com.lineage.server.model.Instance.L1MonsterInstance;
 import com.lineage.server.model.Instance.L1PcInstance;
+import com.lineage.server.model.Instance.L1TDInstance;
 import com.lineage.server.serverpackets.S_NPCPack;
 import com.lineage.server.world.World;
 
@@ -135,7 +136,7 @@ public class L1UbSpawn implements Comparable<L1UbSpawn> {
     public void spawnOneTower(int where) {
         final L1UltimateBattle ub = UBTable.getInstance().getUb(this._ubId);
         final L1Location loc = L1UTDSpawn.getInstance().getTower(where);
-        final L1MonsterInstance mob = new L1TDInstance(NpcTable.get()
+        final L1TDInstance mob = new L1TDInstance(NpcTable.get()
                 .getTemplate(this.getNpcTemplateId()));
 
         mob.setId(IdFactoryNpc.get().nextId());

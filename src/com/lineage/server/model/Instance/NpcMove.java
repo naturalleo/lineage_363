@@ -111,7 +111,7 @@ public class NpcMove extends NpcMoveExecutor {
 	 * @return 移動方向
 	 */
 	@Override
-	public int moveDirection(int x, int y) { //	移动到指定的目标点
+	public int moveDirection(int x, int y) {
 		int dir = 0;
 		try {
 			// 取回與目標點距離
