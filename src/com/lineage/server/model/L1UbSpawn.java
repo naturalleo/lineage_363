@@ -135,7 +135,7 @@ public class L1UbSpawn implements Comparable<L1UbSpawn> {
     public void spawnOneTower(int where) {
         final L1UltimateBattle ub = UBTable.getInstance().getUb(this._ubId);
         final L1Location loc = L1UTDSpawn.getInstance().getTower(where);
-        final L1MonsterInstance mob = new L1MonsterInstance(NpcTable.get()
+        final L1MonsterInstance mob = new L1TDInstance(NpcTable.get()
                 .getTemplate(this.getNpcTemplateId()));
 
         mob.setId(IdFactoryNpc.get().nextId());
