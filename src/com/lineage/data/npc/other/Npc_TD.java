@@ -45,7 +45,7 @@ public class Npc_TD extends NpcExecutor {
     }
     @Override
     public int workTime() {
-        return 30;
+        return 5;
     }
 
     @Override
@@ -62,7 +62,8 @@ public class Npc_TD extends NpcExecutor {
 
         private final NpcWorkMove _npcMove;
 
-        private final int[]  _targetPos = new int[]{33505, 32733};
+
+        private final int[]  _targetPos = new int[]{33504, 32734};
 
 
         boolean _isStop = false;

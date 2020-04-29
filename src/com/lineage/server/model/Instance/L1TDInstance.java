@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import com.lineage.config.ConfigAlt;
 import com.lineage.config.ConfigOther;
 import com.lineage.config.ConfigRate;
+import com.lineage.data.executor.NpcExecutor;
 import com.lineage.server.ActionCodes;
 import com.lineage.server.datatables.NpcScoreTable;
 import com.lineage.server.datatables.NpcTable;
@@ -39,6 +40,7 @@ import com.lineage.server.serverpackets.S_SkillBrave;
 import com.lineage.server.templates.L1Npc;
 import com.lineage.server.templates.L1Skills;
 import com.lineage.server.thread.GeneralThreadPool;
+import com.lineage.server.timecontroller.npc.NpcWorkTimer;
 import com.lineage.server.utils.CalcExp;
 import com.lineage.server.utils.CheckUtil;
 import com.lineage.server.world.World;
@@ -150,7 +152,7 @@ public class L1TDInstance extends L1NpcInstance {
         }
     }
 
-    private L1PcInstance searchTarget(L1MonsterInstance npc) {
+    private L1PcInstance searchTarget(L1TDInstance npc) {
         // 攻击目标搜寻
         L1PcInstance targetPlayer = null;
         for (final L1PcInstance pc : World.get().getVisiblePlayer(npc)) {
@@ -389,17 +391,24 @@ public class L1TDInstance extends L1NpcInstance {
     public L1TDInstance(final L1Npc template) {
         super(template);
         this._storeDroped = false;
+        this.setRest(true);
+        try {
+                final Class<?> cls = Class.forName("com.lineage.data.npc.other.Npc_TD");
+                WORK = (NpcExecutor) cls.getMethod("get").invoke(null);
+                if (WORK.workTime() != 0) {
+                    // 加入NPC工作列队
+                    NpcWorkTimer.put(this, WORK.workTime());
 
-        final Class<?> cls = Class.forName("com.lineage.data.npc.Npc_TD");
-        WORK = (NpcExecutor) cls.getMethod("get")
-                .invoke(null);
-        if (WORK.workTime() != 0) {
-            // 加入NPC工作列队
-            NpcWorkTimer.put(this, WORK.workTime());
+                } else {// 工作时间设置为0
+                    // 执行一次
+                    WORK.work(this);
+                }
+            }catch (final ClassNotFoundException e) {
+            String error = "发生[TD NPC档案]错误, 检查档案是否存在: Npc_TD";
+            _log.error(error);
 
-        } else {// 工作时间设置为0
-            // 执行一次
-            WORK.work(this);
+        } catch (final Exception e) {
+            _log.error(e.getLocalizedMessage(), e);
         }
 
     }
@@ -793,7 +802,7 @@ public class L1TDInstance extends L1NpcInstance {
             mob.setExp(0);
             mob.setKarma(0);
             mob.allTargetClear();
-            mob.setPortalNumber(L1MonsterInstance.this.getPortalNumber());
+            mob.setPortalNumber(L1TDInstance.this.getPortalNumber());
 
             int deltime = 0;
             // 特定NPC死亡时间设置
@@ -871,7 +880,7 @@ public class L1TDInstance extends L1NpcInstance {
         try {
             // 设置掉落物品
             final DropShareExecutor dropShareExecutor = new DropShare();
-            dropShareExecutor.dropShare(L1MonsterInstance.this, dropTargetList,
+            dropShareExecutor.dropShare(L1TDInstance.this, dropTargetList,
                     dropHateList);
 
         } catch (final Exception e) {

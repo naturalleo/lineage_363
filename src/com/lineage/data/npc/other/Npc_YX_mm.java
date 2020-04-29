@@ -1,4 +1,4 @@
-package com.lineage.data.npc.other;
+﻿package com.lineage.data.npc.other;
 
 import com.lineage.data.cmd.CreateNewItem;
 import com.lineage.data.executor.NpcExecutor;
@@ -106,17 +106,163 @@ public class Npc_YX_mm extends NpcExecutor {
 				}
 			}
 		}
-		if (cmd.equalsIgnoreCase("K")) { // 对话当
-			if (pc.getInventory().checkEnchantItem(20011, 9, 1) && pc.getInventory().checkItem(40308, 50000000)) {
-				pc.getInventory().consumeEnchantItem(20011,9,1);
-				pc.getInventory().consumeItem(40308,50000000);
-				pc.getInventory().storeItem(28014, 1);
-				pc.sendPackets(new S_SystemMessage("真．抗魔法头盔."));
+		if (cmd.equalsIgnoreCase("XH1")) { // 兑换苍天双刀
+			if (pc.getInventory().checkEnchantItem(81, 8, 1) && pc.getInventory().checkItem(40308, 100000) && pc.getInventory().checkItem(44070, 30)) {
+				pc.getInventory().consumeEnchantItem(81,8,1);
+				pc.getInventory().consumeItem(40308,1000000);
+                pc.getInventory().consumeItem(44070,30);
+				pc.getInventory().storeItem(236, 1);
+				pc.sendPackets(new S_SystemMessage("苍天双刀."));
 			} else {
 				//pc.sendPackets(new S_SystemMessage("请检查条件是否达到."));
-				CreateNewItem.checkNewItem(pc, 40308, 50000000);
-				if (!pc.getInventory().checkEnchantItem(20011, 9, 1)) {
-                    pc.sendPackets(new S_ServerMessage(337, "+9 "
+				CreateNewItem.checkNewItem(pc, 40308, 1000000);
+				CreateNewItem.checkNewItem(pc, 44070, 30);
+				if (!pc.getInventory().checkEnchantItem(81, 8, 1)) {
+                    pc.sendPackets(new S_ServerMessage(337, "+8 "
+                            + ItemTable.get().getTemplate(81)
+                                    .getNameId())); // \f1%0が不足しています。
+				}
+			}
+		}
+        if (cmd.equalsIgnoreCase("XH2")) { // 兑换苍天之剑
+			if (pc.getInventory().checkEnchantItem(100041, 8, 1) && pc.getInventory().checkItem(40308, 100000) && pc.getInventory().checkItem(44070, 30)) {
+				pc.getInventory().consumeEnchantItem(100041,8,1);
+				pc.getInventory().consumeItem(40308,1000000);
+                pc.getInventory().consumeItem(44070,30);
+				pc.getInventory().storeItem(232, 1);
+				pc.sendPackets(new S_SystemMessage("苍天之剑."));
+			} else {
+				//pc.sendPackets(new S_SystemMessage("请检查条件是否达到."));
+				CreateNewItem.checkNewItem(pc, 40308, 1000000);
+				CreateNewItem.checkNewItem(pc, 44070, 30);
+				if (!pc.getInventory().checkEnchantItem(100041, 8, 1)) {
+                    pc.sendPackets(new S_ServerMessage(337, "+8 "
+                            + ItemTable.get().getTemplate(100041)
+                                    .getNameId())); // \f1%0が不足しています。
+				}
+			}
+		}
+        if (cmd.equalsIgnoreCase("XH3")) { // 兑换苍天巨剑
+			if (pc.getInventory().checkEnchantItem(64, 8, 1) && pc.getInventory().checkItem(40308, 100000) && pc.getInventory().checkItem(44070, 30)) {
+				pc.getInventory().consumeEnchantItem(64,8,1);
+				pc.getInventory().consumeItem(40308,1000000);
+                pc.getInventory().consumeItem(44070,30);
+				pc.getInventory().storeItem(233, 1);
+				pc.sendPackets(new S_SystemMessage("苍天巨剑."));
+			} else {
+				//pc.sendPackets(new S_SystemMessage("请检查条件是否达到."));
+				CreateNewItem.checkNewItem(pc, 40308, 1000000);
+				CreateNewItem.checkNewItem(pc, 44070, 30);
+				if (!pc.getInventory().checkEnchantItem(64, 8, 1)) {
+                    pc.sendPackets(new S_ServerMessage(337, "+8 "
+                            + ItemTable.get().getTemplate(64)
+                                    .getNameId())); // \f1%0が不足しています。
+				}
+			}
+		}
+        if (cmd.equalsIgnoreCase("XH4")) { // 兑换苍天之弓
+			if (pc.getInventory().checkEnchantItem(181, 8, 1) && pc.getInventory().checkItem(40308, 100000) && pc.getInventory().checkItem(44070, 30)) {
+				pc.getInventory().consumeEnchantItem(181,8,1);
+				pc.getInventory().consumeItem(40308,1000000);
+                pc.getInventory().consumeItem(44070,30);
+				pc.getInventory().storeItem(239, 1);
+				pc.sendPackets(new S_SystemMessage("苍天之弓."));
+			} else {
+				//pc.sendPackets(new S_SystemMessage("请检查条件是否达到."));
+				CreateNewItem.checkNewItem(pc, 40308, 1000000);
+				CreateNewItem.checkNewItem(pc, 44070, 30);
+				if (!pc.getInventory().checkEnchantItem(181, 8, 1)) {
+                    pc.sendPackets(new S_ServerMessage(337, "+8 "
+                            + ItemTable.get().getTemplate(181)
+                                    .getNameId())); // \f1%0が不足しています。
+				}
+			}
+		}
+        if (cmd.equalsIgnoreCase("XH5")) { // 兑换苍天魔杖
+			if (pc.getInventory().checkEnchantItem(131, 8, 1) && pc.getInventory().checkItem(40308, 100000) && pc.getInventory().checkItem(44070, 30)) {
+				pc.getInventory().consumeEnchantItem(131,8,1);
+				pc.getInventory().consumeItem(40308,1000000);
+                pc.getInventory().consumeItem(44070,30);
+				pc.getInventory().storeItem(238, 1);
+				pc.sendPackets(new S_SystemMessage("苍天魔杖."));
+			} else {
+				//pc.sendPackets(new S_SystemMessage("请检查条件是否达到."));
+				CreateNewItem.checkNewItem(pc, 40308, 1000000);
+				CreateNewItem.checkNewItem(pc, 44070, 30);
+				if (!pc.getInventory().checkEnchantItem(131, 8, 1)) {
+                    pc.sendPackets(new S_ServerMessage(337, "+8 "
+                            + ItemTable.get().getTemplate(131)
+                                    .getNameId())); // \f1%0が不足しています。
+				}
+			}
+		}
+        if (cmd.equalsIgnoreCase("XH6")) { // 兑换苍天钢爪
+			if (pc.getInventory().checkEnchantItem(162, 8, 1) && pc.getInventory().checkItem(40308, 100000) && pc.getInventory().checkItem(44070, 30)) {
+				pc.getInventory().consumeEnchantItem(162,8,1);
+				pc.getInventory().consumeItem(40308,1000000);
+                pc.getInventory().consumeItem(44070,30);
+				pc.getInventory().storeItem(237, 1);
+				pc.sendPackets(new S_SystemMessage("苍天钢爪."));
+			} else {
+				//pc.sendPackets(new S_SystemMessage("请检查条件是否达到."));
+				CreateNewItem.checkNewItem(pc, 40308, 1000000);
+				CreateNewItem.checkNewItem(pc, 44070, 30);
+				if (!pc.getInventory().checkEnchantItem(162, 8, 1)) {
+                    pc.sendPackets(new S_ServerMessage(337, "+8 "
+                            + ItemTable.get().getTemplate(181)
+                                    .getNameId())); // \f1%0が不足しています。
+				}
+			}
+		}
+        if (cmd.equalsIgnoreCase("XH7")) { // 制作塔拉斯手套
+			if (pc.getInventory().checkEnchantItem(20187, 7, 1) && pc.getInventory().checkItem(40308, 100000) && pc.getInventory().checkItem(44070, 30)) {
+				pc.getInventory().consumeEnchantItem(20187,7,1);
+				pc.getInventory().consumeItem(40308,1000000);
+                pc.getInventory().consumeItem(44070,30);
+				pc.getInventory().storeItem(28011, 1);
+				pc.sendPackets(new S_SystemMessage("塔拉斯手套."));
+			} else {
+				//pc.sendPackets(new S_SystemMessage("请检查条件是否达到."));
+				CreateNewItem.checkNewItem(pc, 40308, 1000000);
+				CreateNewItem.checkNewItem(pc, 44070, 30);
+				if (!pc.getInventory().checkEnchantItem(20187, 7, 1)) {
+                    pc.sendPackets(new S_ServerMessage(337, "+7 "
+                            + ItemTable.get().getTemplate(20187)
+                                    .getNameId())); // \f1%0が不足しています。
+				}
+			}
+		}
+        if (cmd.equalsIgnoreCase("XH8")) { // 制作塔拉斯长靴
+			if (pc.getInventory().checkEnchantItem(20194, 7, 1) && pc.getInventory().checkItem(40308, 100000)&& pc.getInventory().checkItem(44070, 30)) {
+				pc.getInventory().consumeEnchantItem(20194,7,1);
+				pc.getInventory().consumeItem(40308,1000000);
+                pc.getInventory().consumeItem(44070,30);
+				pc.getInventory().storeItem(70034, 1);
+				pc.sendPackets(new S_SystemMessage("塔拉斯长靴."));
+			} else {
+				//pc.sendPackets(new S_SystemMessage("请检查条件是否达到."));
+				CreateNewItem.checkNewItem(pc, 40308, 1000000);
+				CreateNewItem.checkNewItem(pc, 44070, 30);
+				if (!pc.getInventory().checkEnchantItem(20194, 7, 1)) {
+                    pc.sendPackets(new S_ServerMessage(337, "+7 "
+                            + ItemTable.get().getTemplate(20194)
+                                    .getNameId())); // \f1%0が不足しています。
+				}
+			}
+		}
+        if (cmd.equalsIgnoreCase("XH9")) { // 制作真．抗魔法头盔
+			if (pc.getInventory().checkEnchantItem(20011, 8, 1) && pc.getInventory().checkItem(40308, 100000) && pc.getInventory().checkItem(44070, 30)) {
+				pc.getInventory().consumeEnchantItem(20011,8,1);
+				pc.getInventory().consumeItem(40308,1000000);
+                pc.getInventory().consumeItem(44070,30);
+				pc.getInventory().storeItem(28014, 1);
+				pc.sendPackets(new S_SystemMessage("真.抗魔法头盔."));
+			} else {
+				//pc.sendPackets(new S_SystemMessage("请检查条件是否达到."));
+				CreateNewItem.checkNewItem(pc, 40308, 1000000);
+				CreateNewItem.checkNewItem(pc, 44070, 30);
+				if (!pc.getInventory().checkEnchantItem(20011, 8, 1)) {
+                    pc.sendPackets(new S_ServerMessage(337, "+8 "
                             + ItemTable.get().getTemplate(20011)
                                     .getNameId())); // \f1%0が不足しています。
 				}
