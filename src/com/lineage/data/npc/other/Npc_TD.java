@@ -62,7 +62,7 @@ public class Npc_TD extends NpcExecutor {
 
         private final NpcWorkMove _npcMove;
 
-        private final int[]  _targetPos = new int[]{33066, 32311};
+        private final int[]  _targetPos = new int[]{33505, 32733};
 
 
         boolean _isStop = false;
