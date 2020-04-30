@@ -391,7 +391,9 @@ public class L1TDInstance extends L1NpcInstance {
     public L1TDInstance(final L1Npc template) {
         super(template);
         this._storeDroped = false;
-        this.setRest(true);
+
+
+        /*
         try {
                 final Class<?> cls = Class.forName("com.lineage.data.npc.other.Npc_TD");
                 WORK = (NpcExecutor) cls.getMethod("get").invoke(null);
@@ -409,7 +411,7 @@ public class L1TDInstance extends L1NpcInstance {
 
         } catch (final Exception e) {
             _log.error(e.getLocalizedMessage(), e);
-        }
+        }*/
 
     }
 

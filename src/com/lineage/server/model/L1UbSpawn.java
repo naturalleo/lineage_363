@@ -4,6 +4,7 @@ import com.lineage.server.IdFactoryNpc;
 import com.lineage.server.datatables.NpcTable;
 import com.lineage.server.datatables.UBTable;
 import com.lineage.server.model.Instance.L1MonsterInstance;
+import com.lineage.server.model.Instance.L1NpcInstance;
 import com.lineage.server.model.Instance.L1PcInstance;
 import com.lineage.server.model.Instance.L1TDInstance;
 import com.lineage.server.serverpackets.S_NPCPack;
@@ -133,7 +134,7 @@ public class L1UbSpawn implements Comparable<L1UbSpawn> {
         mob.turnOnOffLight();
         // mob.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // チャット开始
     }
-    public void spawnOneTower(int where) {
+    public void spawnOneTower(int where, L1NpcInstance towner) {
         final L1UltimateBattle ub = UBTable.getInstance().getUb(this._ubId);
         final L1Location loc = L1UTDSpawn.getInstance().getTower(where);
         final L1TDInstance mob = new L1TDInstance(NpcTable.get()
@@ -149,6 +150,10 @@ public class L1UbSpawn implements Comparable<L1UbSpawn> {
         mob.set_storeDroped(!(3 < this.getGroup()));
         mob.setUbSealCount(this.getSealCount());
         mob.setUbId(this.getUbId());
+        mob.set_ranged(2);
+        mob.setHate(towner, 10);
+        mob.startAI();
+
 
         World.get().storeObject(mob);
         World.get().addVisibleObject(mob);
@@ -171,9 +176,9 @@ public class L1UbSpawn implements Comparable<L1UbSpawn> {
         }
     }
 
-    public void spawnAllTower(){
+    public void spawnAllTower(L1NpcInstance towner){
         for (int i = 0; i < this.getAmount(); i++) {
-            this.spawnOneTower(i);
+            this.spawnOneTower(i, towner);
         }        
     }
 

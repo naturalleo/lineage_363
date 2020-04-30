@@ -88,6 +88,9 @@ public class L1UTDSpawn {
 
     private final ArrayList<L1PcInstance> _members = new ArrayList<L1PcInstance>();
 
+
+    private L1NpcInstance _towner = null;
+
     /**
      * ラウンド开始时のメッセージを送信する。
      * 
@@ -263,6 +266,8 @@ public class L1UTDSpawn {
          * 
          * @throws InterruptedException
          */
+        private final L1NpcInstance _npc;
+
         private void countDown() throws InterruptedException {
             // XXX - このIDは间违っている
             final int MSGID_COUNT = 637;
@@ -314,6 +319,9 @@ public class L1UTDSpawn {
             }
             L1UTDSpawn.this.removeRetiredMembers();
         }
+        private UTDThread(final L1NpcInstance npc) {
+            this._npc = npc;
+        }
 
         /**
          * スレッドプロシージャ。
@@ -336,7 +344,7 @@ public class L1UTDSpawn {
 
                     for (final L1UbSpawn spawn : spawnList) {
                         if (L1UTDSpawn.this.getMembersCount() > 0) {
-                            spawn.spawnAllTower();
+                            spawn.spawnAllTower(this._npc);
                             break;
                         }
 
@@ -385,7 +393,7 @@ public class L1UTDSpawn {
         final Random random = new Random();
         this._pattern = random.nextInt(patternsMax) + 1; // 出现パターンを决める
 
-        final UTDThread ub = new UTDThread();
+        final UTDThread ub = new UTDThread(this._towner);
         GeneralThreadPool.get().execute(ub);
     }
 
@@ -644,7 +652,7 @@ public class L1UTDSpawn {
         try {
             if (l1npc != null) {
                 final L1NpcInstance npc = NpcTable.get().newNpcInstance(l1npc);
-
+                this._towner = npc;
                 npc.setId(IdFactoryNpc.get().nextId());
                 npc.setX(locx);
                 npc.setY(locy);

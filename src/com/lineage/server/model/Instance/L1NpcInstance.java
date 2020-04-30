@@ -155,7 +155,7 @@ public class L1NpcInstance extends L1Character {
     /**
      * 启用NPC AI
      */
-    protected void startAI() {
+    public void startAI() {
         if (isDead()) {
             return;
         }
