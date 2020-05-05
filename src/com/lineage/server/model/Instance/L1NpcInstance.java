@@ -400,7 +400,7 @@ public class L1NpcInstance extends L1Character {
         }
     }
 
-    private void attack(L1Character target) {
+    public void attack(L1Character target) {
         // 攻击可能位置
         if (isAttackPosition(target.getX(), target.getY(), get_ranged())) {// 已经到达可以攻击的距离
             if (_mobSkill.isSkillTrigger(target)) { // トリガの条件に合うスキルがある
@@ -905,7 +905,7 @@ public class L1NpcInstance extends L1Character {
     /**
      * 现在目标消除(hateList)
      */
-    private void tagertClear() {
+    public void tagertClear() {
         if (this._target == null) {
             return;
         }

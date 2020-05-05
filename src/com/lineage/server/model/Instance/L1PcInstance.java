@@ -967,6 +967,12 @@ public class L1PcInstance extends L1Character {
                     }
                 }
                 break;
+            case 88:
+                if (obj instanceof L1NpcInstance) {
+                    if (((L1NpcInstance)obj).getNpcTemplate().get_npcId() == 100000)
+                        return true;
+                }
+                break;            
         }
         return false;
     }

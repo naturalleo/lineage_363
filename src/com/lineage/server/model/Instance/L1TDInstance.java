@@ -151,6 +151,75 @@ public class L1TDInstance extends L1NpcInstance {
             ISASCAPE = false;
         }
     }
+    public void attack(L1Character target) {
+        // 攻击可能位置
+        if (isAttackPosition(target.getX(), target.getY(), get_ranged())) {// 已经到达可以攻击的距离
+            if (_mobSkill.isSkillTrigger(target)) { // トリガの条件に合うスキルがある
+                if (_random.nextInt(2) >= 1) { // 一定の确率で物理攻击
+                    setHeading(targetDirection(target.getX(), target.getY()));
+                    attackTarget(target);
+
+                } else {
+                    if (_mobSkill.skillUse(target, true)) { // スキル使用(mobskill.sqlのTriRndに从う)
+                        setSleepTime(calcSleepTime(_mobSkill.getSleepTime(),
+                                MAGIC_SPEED));
+
+                    } else { // スキル使用が失败したら物理攻击
+                        setHeading(targetDirection(target.getX(), target.getY()));
+                        attackTarget(target);
+                    }
+                }
+
+            } else {
+                setHeading(targetDirection(target.getX(), target.getY()));
+                attackTarget(target);
+            }
+            // XXX
+            if (_npcMove != null) {
+                _npcMove.clear();
+            }
+
+        } else { // 攻击不可能位置
+            // 对象直线上无障碍
+            if (glanceCheck(_target.getX(), _target.getY())) {
+                if (_mobSkill.skillUse(target, false)) {
+                    // スキル使用(mobskill.sqlのTriRndに从わず、発动确率は100%。ただしサモン、强制变身は常にTriRndに从う。)
+                    setSleepTime(calcSleepTime(_mobSkill.getSleepTime(),
+                            MAGIC_SPEED));
+                    return;
+                }
+            }
+
+            if (getPassispeed() > 0) {
+                // 移动できるキャラ
+                final int distance = getLocation().getTileDistance(
+                        target.getLocation());
+
+                if (_npcMove != null) {
+                    final int dir = _npcMove.moveDirection(target.getX(),
+                            target.getY());
+                    if (dir == -1) {
+                        return;
+
+                    } else {
+                        _npcMove.setDirectionMove(dir);
+                        setSleepTime(calcSleepTime(getPassispeed(), MOVE_SPEED));
+                    }
+                }
+
+            } else {
+                switch (this.getGfxId()) {// XXX
+                    case 816:// 警卫(妖堡箭塔)
+                        attackTarget(target);
+                        break;
+                    default:
+                        tagertClear();
+                        break;
+                }
+            }
+        }
+    }
+
 
     private L1PcInstance searchTarget(L1TDInstance npc) {
         // 攻击目标搜寻

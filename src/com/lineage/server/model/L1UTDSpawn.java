@@ -618,7 +618,7 @@ public class L1UTDSpawn {
     }
     public void initTower(){
         this._towerLocation = new L1Location(33505, 32733, this._mapId);
-        int npcId = 81111;
+        int npcId = 100000;
         final L1Npc l1npc = NpcTable.get().getTemplate(npcId); // 取回npc资料
         SpawnWarObject(l1npc, _towerLocation.getX(), _towerLocation.getY(), (short)_towerLocation.getMapId());
 
