@@ -141,6 +141,12 @@ public class C_CreateChar extends ClientBasePacket {
             pc.addBaseWis((byte) this.readC());
             pc.addBaseCha((byte) this.readC());
             pc.addBaseInt((byte) this.readC());
+            if(pc.getType() >= 6){ // 去除龙骑士和幻术师
+                client.out().encrypt(
+                        new S_CharCreateStatus(
+                                S_CharCreateStatus.REASON_INVALID_NAME));
+                return;                
+            }
 
             boolean isStatusError = false;
             final int originalStr = ORIGINAL_STR[pc.getType()];
